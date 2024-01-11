@@ -11,4 +11,5 @@ module Alu(
 
         result <= input16 + temp;
     end
+
 endmodule

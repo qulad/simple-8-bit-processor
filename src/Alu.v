@@ -46,4 +46,5 @@ module Alu(
             end
         endcase
     end
+
 endmodule
