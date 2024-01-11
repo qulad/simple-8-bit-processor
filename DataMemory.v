@@ -1,22 +1,22 @@
 module DataMemory(
-    input wire clk,
-    input wire rst,
-    input wire enable,
-    input wire [7:0] address,
-    input wire [7:0] dataInput,
-    output reg [7:0] dataOutput
+    input   wire            clk,
+    input   wire            rst,
+    input   wire            enable,
+    input   wire    [7:0]   address,
+    input   wire    [7:0]   dataInput,
+    output  reg     [7:0]   dataOutput
 );
 
-    reg [7:0] memory [7:0]; // Bellek tanımı, 32 adres alanı için
+    reg [7:0]   memory  [32:0];
 
     always @(posedge clk or posedge rst) begin
         if (rst)
             for (integer i = 0; i < 8; i = i + 1)
-                memory[i] <= 7'd0; // Belleği sıfırlama
+                memory[i] <= 7'd0;
         else begin
-            if (enable) // Belleğe yazma
+            if (enable)
                 mem[address] <= dataInput;
-            else // Bellekten okuma
+            else
                 dataOutput <= mem[dataInput];
         end
     end
