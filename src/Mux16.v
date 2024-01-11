@@ -3,7 +3,7 @@ module Mux16 (
     input   wire    [15:0]  inputControl1,
     input   wire            control,
 
-    output  reg     [15:0]   muxed
+    output  reg     [15:0]  muxed
 );
     always @(*) begin
         if (control) begin
