@@ -5,8 +5,8 @@ module Extender (
     output  reg     [7:0]   extendedControl0,
     output  reg     [15:0]  extendedControl1
 );
-    reg [7:0] temp8;
-    reg [15:0] temp15;
+    reg [7:0]   temp8;
+    reg [15:0]  temp15;
 
     always @(*) begin
         if (control) begin

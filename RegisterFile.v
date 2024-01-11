@@ -10,7 +10,7 @@ module RegisterFile (
     output  reg     [7:0]   data1,
     output  reg     [7:0]   data2
 );    
-    reg [7:0] registers [7:0];
+    reg [7:0]   registers   [7:0];
 
     always @(posedge clk, negedge rst) begin
         if (rst) begin
