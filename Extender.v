@@ -1,7 +1,7 @@
 module Extender (
-    input wire [5:0] imm,
+    input   wire    [5:0]   imm,
 
-    output reg [7:0] extended
+    output  reg     [7:0]   extended
 );
     reg [7:0] temp;
 

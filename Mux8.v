@@ -1,9 +1,9 @@
 module Mux8 (
-    input wire [7:0] inputControl0,
-    input wire [7:0] inputControl1,
-    input wire control,
+    input   wire    [7:0]   inputControl0,
+    input   wire    [7:0]   inputControl1,
+    input   wire            control,
 
-    output reg [7:0] muxed
+    output  reg     [7:0]   muxed
 );
     always @(*) begin
         if (control) begin
