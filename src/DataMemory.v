@@ -5,14 +5,14 @@ module DataMemory(
     input   wire    [7:0]   address,
     input   wire    [7:0]   dataInput,
 
-    output  reg     [15:0]  dataOutput
+    output  reg     [7:0]   dataOutput
 );
-    reg [15:0]  memory  [32:0];
+    reg [7:0]   memory  [32:0];
 
     always @(posedge clk or posedge rst) begin
         if (rst)
             for (integer i = 0; i < 8; i = i + 1)
-                memory[i] <= 15'd0;
+                memory[i] <= 7'd0;
         else begin
             if (enable)
                 mem[address] <= dataInput;
