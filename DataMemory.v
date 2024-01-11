@@ -7,7 +7,6 @@ module DataMemory(
 
     output  reg     [7:0]   dataOutput
 );
-
     reg [7:0]   memory  [32:0];
 
     always @(posedge clk or posedge rst) begin

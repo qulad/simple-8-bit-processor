@@ -5,7 +5,6 @@ module ProgramCounter (
 
     output  reg     [15:0]  current
 );
-
     always @(posedge clk, negedge rst) begin
         if (rst) begin
             current = 15'd0;
