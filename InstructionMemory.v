@@ -1,12 +1,12 @@
 module DataMemory(
-    input wire clk,
-    input wire rst,
-    input wire enable,
-    input wire [7:0] address,
-    input wire [7:0] dataInput,
-    output reg [15:0] dataOutput
-);
+    input   wire            clk,
+    input   wire            rst,
+    input   wire            enable,
+    input   wire    [7:0]   address,
+    input   wire    [7:0]   dataInput,
 
+    output  reg     [15:0]  dataOutput
+);
     reg [15:0]  memory  [32:0];
 
     always @(posedge clk or posedge rst) begin

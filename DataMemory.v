@@ -4,6 +4,7 @@ module DataMemory(
     input   wire            enable,
     input   wire    [7:0]   address,
     input   wire    [7:0]   dataInput,
+
     output  reg     [7:0]   dataOutput
 );
 
