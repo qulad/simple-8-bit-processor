@@ -1,4 +1,4 @@
-module Mux8 (
+module Mux (
     input   wire    [7:0]   inputControl0,
     input   wire    [7:0]   inputControl1,
     input   wire            control,

@@ -5,27 +5,23 @@ module Extender (
     input   wire            beq,
 
     output  reg     [7:0]   extendedControl0,
-    output  reg     [15:0]  extendedControl1
+    output  reg     [7:0]   extendedControl1
 );
-    reg [7:0]   temp8;
-    reg [15:0]  temp15;
+    reg [7:0]   temp;
 
     always @(*) begin
         if (control) begin
-            temp15[15:10] <= imm;
+            temp[7:2] <= imm;
 
             extendedControl1 <= temp15;
         end
         else begin
-            if (beq) begin
-                temp15[15:8] <= addr;
-
-                extendedControl1 <= temp15;
-            end
+            if (beq)
+                extendedControl1 <= addr;
             else begin
-                temp15[7:2] <= imm;
+                temp[7:2] <= imm;
 
-                extendedControl0 <= temp15;
+                extendedControl0 <= temp;
             end
         end
     end
