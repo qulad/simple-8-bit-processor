@@ -12,12 +12,13 @@ module ControlUnit (
     output  reg     [7:0]   addr,
 
     output  reg     [1:0]   alu,
-    output  reg             mux8,
-    output  reg             mux8to16,
+    output  reg             muxD,
+    output  reg             muxE,
     output  reg             registerFileEnable,
     output  reg             extenderControl,
-    output  reg             mux16A,
-    output  reg             mux16B,
+    output  reg             muxA,
+    output  reg             muxB,
+    output  reg             muxC,
     output  reg             dataMemoryEnable,
     output  reg             beq
 );
@@ -27,12 +28,12 @@ module ControlUnit (
     always @(posedge clk, negedge rst) begin
         if (rst) begin
             alu <= 2'b00;
-            mux8 <= 0;
-            mux8to16 <= 0;
+            muxD <= 0;
+            muxE <= 0;
             registerFileEnable <= 0;
             extenderControl <= 0;
-            mux16A <= 0;
-            mux16B <= 0;
+            muxA <= 0;
+            muxB <= 0;
             dataMemoryEnable <= 0;
             beq <= 0;
         end
@@ -46,45 +47,49 @@ module ControlUnit (
                     case(func)
                         3'b000: begin // add
                             alu <= 2'b00;
-                            mux8 <= 0;
-                            mux8to16 <= 1;
+                            muxD <= 0;
+                            muxE <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            mux16A <= 0;
-                            mux16B <= 0;
+                            muxA <= 0;
+                            muxB <= 0;
+                            muxC <= 0;
                             dataMemoryEnable <= 0;
                             beq <= 0;
                         end
                         3'b010: begin // sub
                             alu <= 2'b01;
-                            mux8 <= 0;
-                            mux8to16 <= 1;
+                            muxD <= 0;
+                            muxE <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            mux16A <= 0;
-                            mux16B <= 0;
+                            muxA <= 0;
+                            muxB <= 0;
+                            muxC <= 0;
                             dataMemoryEnable <= 0;
                             beq <= 0;
                         end
                         3'b100: begin // and
                             alu <= 2'b10;
-                            mux8 <= 0;
-                            mux8to16 <= 1;
+                            muxD <= 0;
+                            muxE <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            mux16A <= 0;
-                            mux16B <= 0;
+                            muxA <= 0;
+                            muxB <= 0;
+                            muxC <= 0;
                             dataMemoryEnable <= 0;
                             beq <= 0;
                         end
                         3'b101: begin // or
                             alu <= 2'b11;
-                            mux8 <= 0;
-                            mux8to16 <= 1;
+                            muxD <= 0;
+                            muxE <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            mux16A <= 0;
-                            mux16B <= 0;
+                            muxA <= 0;
+                            muxB <= 0;
+                            muxC <= 0;
                             dataMemoryEnable <= 0;
                             beq <= 0;
                         end
@@ -96,12 +101,13 @@ module ControlUnit (
                 end
                 4'b0100: begin // addi
                     alu <= 2'b00;
-                    mux8 <= 1;
-                    mux8to16 <= 1;
+                    muxD <= 1;
+                    muxE <= 1;
                     registerFileEnable <= 1;
                     extenderControl <= 0;
-                    mux16A <= 0;
-                    mux16B <= 0;
+                    muxA <= 0;
+                    muxB <= 0;
+                    muxC <= 0;
                     dataMemoryEnable <= 0;
                     beq <= 0;
                     imm <= instruction[5:0];
@@ -110,12 +116,13 @@ module ControlUnit (
                 end
                 4'b1011: begin // lw
                     alu <= 2'b00;
-                    mux8 <= 1;
-                    mux8to16 <= 0;
+                    muxD <= 1;
+                    muxE <= 0;
                     registerFileEnable <= 0;
                     extenderControl <= 0;
-                    mux16A <= 0;
-                    mux16B <= 0;
+                    muxA <= 0;
+                    muxB <= 0;
+                    muxC <= 0;
                     dataMemoryEnable <= 1;
                     beq <= 0;
                     imm <= instruction[5:0];
@@ -124,12 +131,13 @@ module ControlUnit (
                 end
                 4'b1111: begin // sw
                     alu <= 2'b00;
-                    mux8 <= 1;
-                    mux8to16 <= 0;
+                    muxD <= 1;
+                    muxE <= 0;
                     registerFileEnable <= 1;
                     extenderControl <= 0;
-                    mux16A <= 0;
-                    mux16B <= 0;
+                    muxA <= 0;
+                    muxB <= 0;
+                    muxC <= 0;
                     dataMemoryEnable <= 0;
                     beq <= 0;
                     imm <= instruction[5:0];
@@ -138,24 +146,26 @@ module ControlUnit (
                 end
                 4'b1000: begin // beq
                     alu <= 2'b01;
-                    mux8 <= 1;
-                    mux8to16 <= 0;
+                    muxD <= 1;
+                    muxE <= 0;
                     registerFileEnable <= 0;
                     extenderControl <= 0;
-                    mux16A <= 0;
-                    mux16B <= 0;
+                    muxA <= 0;
+                    muxB <= 0;
+                    muxC <= 1;
                     dataMemoryEnable <= 0;
                     beq <= zero;
                     imm <= instruction[5:0];
                 end
                 4'b0010: begin // j
                     alu <= 2'b00;
-                    mux8 <= 0;
-                    mux8to16 <= 0;
+                    muxD <= 0;
+                    muxE <= 0;
                     registerFileEnable <= 0;
                     extenderControl <= 1;
-                    mux16A <= 1;
-                    mux16B <= 1;
+                    muxA <= 1;
+                    muxB <= 1;
+                    muxC <= 1;
                     dataMemoryEnable <= 0;
                     beq <= 0;
                     addr <= instruction[7:0];
