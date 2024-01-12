@@ -9,12 +9,12 @@ module Mux8to16 (
 
     always @(*) begin
         if (control) begin
-            temp[15:7] = inputControl1
+            temp[15:7] <= inputControl1
         end
         else begin
-            temp[15:7] = inputControl0;
+            temp[15:7] <= inputControl0;
         end
-        muxed = temp;
+        muxed <= temp;
     end
-    
+
 endmodule

@@ -7,11 +7,11 @@ module ProgramCounter (
 );
     always @(posedge clk, negedge rst) begin
         if (rst) begin
-            current = 15'd0;
+            current <= 15'd0;
         end
         else begin
-            current = next;
+            current <= next;
         end
     end
-    
+
 endmodule

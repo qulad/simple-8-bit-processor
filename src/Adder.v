@@ -7,7 +7,7 @@ module Alu(
     reg [15:0]  temp;
 
     always @(*) begin
-        temp[15:8] = input8;
+        temp[15:8] <= input8;
 
         result <= input16 + temp;
     end

@@ -7,11 +7,11 @@ module Mux8 (
 );
     always @(*) begin
         if (control) begin
-            muxed = inputControl1;
+            muxed <= inputControl1;
         end
         else begin
-            muxed = inputControl0;
+            muxed <= inputControl0;
         end
     end
-    
+
 endmodule

@@ -12,22 +12,22 @@ module Extender (
 
     always @(*) begin
         if (control) begin
-            temp15[15:10] = imm;
+            temp15[15:10] <= imm;
 
-            extendedControl1 = temp15;
+            extendedControl1 <= temp15;
         end
         else begin
             if (beq) begin
-                temp15[15:8] = addr;
+                temp15[15:8] <= addr;
 
-                extendedControl1 = temp15;
+                extendedControl1 <= temp15;
             end
             else begin
-                temp15[7:2] = imm;
+                temp15[7:2] <= imm;
 
-                extendedControl0 = temp15;
+                extendedControl0 <= temp15;
             end
         end
     end
-    
+
 endmodule
