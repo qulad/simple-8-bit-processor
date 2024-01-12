@@ -15,9 +15,9 @@ module DataMemory(
                 memory[i] <= 7'd0;
         else begin
             if (enable)
-                mem[address] <= dataInput;
+                memory[address] <= dataInput;
             else
-                dataOutput <= mem[dataInput];
+                dataOutput <= memory[dataInput];
         end
     end
 

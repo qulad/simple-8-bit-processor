@@ -5,10 +5,11 @@ module RegisterFile (
     input   wire    [2:0]   address1,
     input   wire    [2:0]   address2,
     input   wire    [2:0]   addressData,
-    input   wire    [2:0]   dataIn,
+    input   wire    [7:0]   dataIn,
 
     output  reg     [7:0]   data1,
-    output  reg     [7:0]   data2
+    output  reg     [7:0]   data2,
+    output  reg     [7:0]   dataMemory
 );    
     reg [2:0]   registers   [7:0];
 
@@ -20,9 +21,10 @@ module RegisterFile (
         else begin
             data1 <= registers[address1];
             data2 <= registers[address2];
+            dataMemory <= registers[addressData];
 
             if (enable)
-                registers[dataIn] <= dataIn;
+                registers[addressData] <= dataIn;
         end
     end
 

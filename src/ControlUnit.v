@@ -13,7 +13,6 @@ module ControlUnit (
 
     output  reg     [1:0]   alu,
     output  reg             muxD,
-    output  reg             muxE,
     output  reg             registerFileEnable,
     output  reg             extenderControl,
     output  reg             muxA,
@@ -29,7 +28,6 @@ module ControlUnit (
         if (rst) begin
             alu <= 2'b00;
             muxD <= 0;
-            muxE <= 0;
             registerFileEnable <= 0;
             extenderControl <= 0;
             muxA <= 0;
@@ -48,10 +46,9 @@ module ControlUnit (
                         3'b000: begin // add
                             alu <= 2'b00;
                             muxD <= 0;
-                            muxE <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            muxA <= 0;
+                            muxA <= 1;
                             muxB <= 0;
                             muxC <= 0;
                             dataMemoryEnable <= 0;
@@ -60,10 +57,9 @@ module ControlUnit (
                         3'b010: begin // sub
                             alu <= 2'b01;
                             muxD <= 0;
-                            muxE <= 1;
+                            muxA <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            muxA <= 0;
                             muxB <= 0;
                             muxC <= 0;
                             dataMemoryEnable <= 0;
@@ -72,10 +68,9 @@ module ControlUnit (
                         3'b100: begin // and
                             alu <= 2'b10;
                             muxD <= 0;
-                            muxE <= 1;
+                            muxA <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            muxA <= 0;
                             muxB <= 0;
                             muxC <= 0;
                             dataMemoryEnable <= 0;
@@ -84,10 +79,9 @@ module ControlUnit (
                         3'b101: begin // or
                             alu <= 2'b11;
                             muxD <= 0;
-                            muxE <= 1;
+                            muxA <= 1;
                             registerFileEnable <= 1;
                             extenderControl <= 0;
-                            muxA <= 0;
                             muxB <= 0;
                             muxC <= 0;
                             dataMemoryEnable <= 0;
@@ -102,10 +96,9 @@ module ControlUnit (
                 4'b0100: begin // addi
                     alu <= 2'b00;
                     muxD <= 1;
-                    muxE <= 1;
+                    muxA <= 1;
                     registerFileEnable <= 1;
                     extenderControl <= 0;
-                    muxA <= 0;
                     muxB <= 0;
                     muxC <= 0;
                     dataMemoryEnable <= 0;
@@ -117,10 +110,9 @@ module ControlUnit (
                 4'b1011: begin // lw
                     alu <= 2'b00;
                     muxD <= 1;
-                    muxE <= 0;
+                    muxA <= 0;
                     registerFileEnable <= 0;
                     extenderControl <= 0;
-                    muxA <= 0;
                     muxB <= 0;
                     muxC <= 0;
                     dataMemoryEnable <= 1;
@@ -132,10 +124,9 @@ module ControlUnit (
                 4'b1111: begin // sw
                     alu <= 2'b00;
                     muxD <= 1;
-                    muxE <= 0;
+                    muxA <= 0;
                     registerFileEnable <= 1;
                     extenderControl <= 0;
-                    muxA <= 0;
                     muxB <= 0;
                     muxC <= 0;
                     dataMemoryEnable <= 0;
@@ -147,7 +138,6 @@ module ControlUnit (
                 4'b1000: begin // beq
                     alu <= 2'b01;
                     muxD <= 1;
-                    muxE <= 0;
                     registerFileEnable <= 0;
                     extenderControl <= 0;
                     muxA <= 0;
@@ -160,10 +150,9 @@ module ControlUnit (
                 4'b0010: begin // j
                     alu <= 2'b00;
                     muxD <= 0;
-                    muxE <= 0;
+                    muxA <= 0;
                     registerFileEnable <= 0;
                     extenderControl <= 1;
-                    muxA <= 1;
                     muxB <= 1;
                     muxC <= 1;
                     dataMemoryEnable <= 0;

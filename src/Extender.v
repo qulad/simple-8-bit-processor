@@ -13,7 +13,7 @@ module Extender (
         if (control) begin
             temp[7:2] <= imm;
 
-            extendedControl1 <= temp15;
+            extendedControl1 <= temp;
         end
         else begin
             if (beq)
